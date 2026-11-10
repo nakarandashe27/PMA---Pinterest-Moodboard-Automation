@@ -1,0 +1,15 @@
+# Local runtime, authorization and browser artifacts
+node_modules/
+dist/
+*.tsbuildinfo
+output/
+.playwright-mcp/
+.local/
+.auth/
+.env
+.env.*
+!.env.example
+*.har
+*.trace.zip
+g1-*.png
+release/

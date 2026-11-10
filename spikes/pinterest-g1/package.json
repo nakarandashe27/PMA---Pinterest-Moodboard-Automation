@@ -1,0 +1,14 @@
+{
+  "name": "pinterest-g1-spike",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "download": "node download.mjs",
+    "preview": "node preview.mjs"
+  }
+}

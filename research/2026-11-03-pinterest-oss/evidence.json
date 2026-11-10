@@ -1,0 +1,618 @@
+{
+  "asOf": "2026-11-03",
+  "timezone": "Europe/Moscow",
+  "method": "Repository metadata + pinned README/source/license inspection + selected issue history; third-party repositories not installed or run",
+  "screenedRepositories": 19,
+  "deeplyReviewedRepositories": 10,
+  "repositories": [
+    {
+      "repo": "sean1832/pinterest-dl",
+      "url": "https://github.com/sean1832/pinterest-dl",
+      "branch": "main",
+      "license": "Apache-2.0",
+      "archived": false,
+      "pushed_at": "2026-07-14T12:53:07Z",
+      "stars": 211,
+      "issues": 3,
+      "description": "An unofficial Pinterest media downloader",
+      "created_at": "2024-03-30T14:00:23Z",
+      "head": {
+        "sha": "ab3914ff33ec800c952e40b8d73278c0621ccf74",
+        "date": "2026-06-15T17:14:57Z",
+        "url": "https://github.com/sean1832/pinterest-dl/commit/ab3914ff33ec800c952e40b8d73278c0621ccf74"
+      }
+    },
+    {
+      "repo": "mikf/gallery-dl",
+      "url": "https://github.com/mikf/gallery-dl",
+      "branch": "master",
+      "license": "GPL-2.0",
+      "archived": false,
+      "pushed_at": "2026-10-31T11:34:24Z",
+      "stars": 20352,
+      "issues": 1082,
+      "description": "Command-line program to download image galleries and collections from several image hosting sites",
+      "created_at": "2014-10-12T19:38:05Z",
+      "head": {
+        "sha": "811d917b4973ae4f556a760e289784fd4714e2f1",
+        "date": "2026-10-31T11:34:22Z",
+        "url": "https://github.com/mikf/gallery-dl/commit/811d917b4973ae4f556a760e289784fd4714e2f1"
+      }
+    },
+    {
+      "repo": "bstoilov/py3-pinterest",
+      "url": "https://github.com/bstoilov/py3-pinterest",
+      "branch": "master",
+      "license": "MIT",
+      "archived": false,
+      "pushed_at": "2026-04-30T23:24:11Z",
+      "stars": 390,
+      "issues": 14,
+      "description": "Fully fledged Python Pinterest client",
+      "created_at": "2019-08-14T16:14:57Z",
+      "head": {
+        "sha": "fdbe3bc64e2ec5bf0e58da01be364d81b6ce689d",
+        "date": "2026-04-30T23:24:07Z",
+        "url": "https://github.com/bstoilov/py3-pinterest/commit/fdbe3bc64e2ec5bf0e58da01be364d81b6ce689d"
+      }
+    },
+    {
+      "repo": "seregazhuk/php-pinterest-bot",
+      "url": "https://github.com/seregazhuk/php-pinterest-bot",
+      "branch": "master",
+      "license": "MIT",
+      "archived": true,
+      "pushed_at": "2020-05-29T10:30:02Z",
+      "stars": 417,
+      "issues": 36,
+      "description": "This PHP library will help you to work with your Pinterest account without using any API account credentials.",
+      "created_at": "2015-07-23T09:22:13Z",
+      "head": null
+    },
+    {
+      "repo": "iamatulsingh/pinscrape",
+      "url": "https://github.com/iamatulsingh/pinscrape",
+      "branch": "main",
+      "license": "MIT",
+      "archived": false,
+      "pushed_at": "2026-08-19T12:57:53Z",
+      "stars": 151,
+      "issues": 3,
+      "description": "A simple library to scrape Pinterest images.",
+      "created_at": "2021-11-05T12:39:16Z",
+      "head": {
+        "sha": "107e769ae108f4ecd2759762e40e8a108606e624",
+        "date": "2026-08-19T12:54:42Z",
+        "url": "https://github.com/iamatulsingh/pinscrape/commit/107e769ae108f4ecd2759762e40e8a108606e624"
+      }
+    },
+    {
+      "repo": "xjdeng/pinterest-image-scraper",
+      "url": "https://github.com/xjdeng/pinterest-image-scraper",
+      "branch": "master",
+      "license": null,
+      "archived": false,
+      "pushed_at": "2020-08-02T18:46:23Z",
+      "stars": 247,
+      "issues": 16,
+      "description": "Takes the URL to a Pinterest board and returns a List of all of the image URLs on that board.",
+      "created_at": "2016-06-13T15:03:49Z",
+      "head": null
+    },
+    {
+      "repo": "mirusu400/Pinterest-infinite-crawler",
+      "url": "https://github.com/mirusu400/Pinterest-infinite-crawler",
+      "branch": "main",
+      "license": "MIT",
+      "archived": false,
+      "pushed_at": "2026-05-11T02:40:01Z",
+      "stars": 95,
+      "issues": 0,
+      "description": "An infinite Pinterest crawler/scraper. Crawl image with inifnite-scroll!",
+      "created_at": "2021-08-20T15:25:49Z",
+      "head": null
+    },
+    {
+      "repo": "dessant/search-by-image",
+      "url": "https://github.com/dessant/search-by-image",
+      "branch": "main",
+      "license": "GPL-3.0",
+      "archived": false,
+      "pushed_at": "2026-06-27T11:49:36Z",
+      "stars": 3806,
+      "issues": 79,
+      "description": "Browser extension for reverse image search, available for Chrome, Edge and Safari",
+      "created_at": "2017-06-17T14:48:41Z",
+      "head": {
+        "sha": "d5d20a64be2fc0fccdedbf52becb0a5f80a83848",
+        "date": "2026-06-27T11:47:37Z",
+        "url": "https://github.com/dessant/search-by-image/commit/d5d20a64be2fc0fccdedbf52becb0a5f80a83848"
+      }
+    },
+    {
+      "repo": "MSFT-Innovation-Hub-India/CUA-Trends-Compiler",
+      "url": "https://github.com/MSFT-Innovation-Hub-India/CUA-Trends-Compiler",
+      "branch": "main",
+      "license": null,
+      "archived": false,
+      "pushed_at": "2025-06-15T14:54:53Z",
+      "stars": 5,
+      "issues": 0,
+      "description": "uses the cua model, responses api, playwright to search for specific trends information from sites like pinterest",
+      "created_at": "2025-06-14T14:49:38Z",
+      "head": {
+        "sha": "69ce85e31c1273b54a6431801d75e1f3679edc4c",
+        "date": "2025-06-15T14:54:42Z",
+        "url": "https://github.com/MSFT-Innovation-Hub-India/CUA-Trends-Compiler/commit/69ce85e31c1273b54a6431801d75e1f3679edc4c"
+      }
+    },
+    {
+      "repo": "pinterest/api-quickstart",
+      "url": "https://github.com/pinterest/api-quickstart",
+      "branch": "main",
+      "license": "Apache-2.0",
+      "archived": false,
+      "pushed_at": "2026-04-13T23:36:53Z",
+      "stars": 212,
+      "issues": 5,
+      "description": "Code that makes it easy to get started with the Pinterest API.",
+      "created_at": "2021-07-07T18:32:56Z",
+      "head": null
+    },
+    {
+      "repo": "pinterest/pinterest-python-sdk",
+      "url": "https://github.com/pinterest/pinterest-python-sdk",
+      "branch": "main",
+      "license": "Apache-2.0",
+      "archived": false,
+      "pushed_at": "2026-09-02T18:26:22Z",
+      "stars": 87,
+      "issues": 10,
+      "description": "An SDK that makes it quick and easy to build applications with Pinterest API.",
+      "created_at": "2022-10-11T15:54:14Z",
+      "head": null
+    },
+    {
+      "repo": "pinterest/pinterest-python-generated-api-client",
+      "url": "https://github.com/pinterest/pinterest-python-generated-api-client",
+      "branch": "main",
+      "license": null,
+      "archived": false,
+      "pushed_at": "2026-08-27T23:52:33Z",
+      "stars": 19,
+      "issues": 2,
+      "description": "This is the auto-generated code using OpenAPI generator. Generated code comprises HTTP requests to various v5 API endpoints.",
+      "created_at": "2022-09-29T17:29:55Z",
+      "head": null
+    },
+    {
+      "repo": "microsoft/playwright",
+      "url": "https://github.com/microsoft/playwright",
+      "branch": "main",
+      "license": "Apache-2.0",
+      "archived": false,
+      "pushed_at": "2026-11-03T04:45:03Z",
+      "stars": 99168,
+      "issues": 31,
+      "description": "Playwright is a framework for Web Testing and Automation. It allows testing Chromium, Firefox and WebKit with a single API. ",
+      "created_at": "2019-11-15T18:32:42Z",
+      "head": null
+    },
+    {
+      "repo": "browser-use/browser-use",
+      "url": "https://github.com/browser-use/browser-use",
+      "branch": "main",
+      "license": "MIT",
+      "archived": false,
+      "pushed_at": "2026-11-02T01:31:56Z",
+      "stars": 119905,
+      "issues": 620,
+      "description": "Open-source Python library for AI browser agents, plus Browser Use Cloud: stealth browsers and a hosted agent API.",
+      "created_at": "2024-10-31T16:00:56Z",
+      "head": null
+    },
+    {
+      "repo": "thetejasagrawal/Pinterest-LocalBoard",
+      "url": "https://github.com/thetejasagrawal/Pinterest-LocalBoard",
+      "branch": "main",
+      "license": "MIT",
+      "archived": false,
+      "pushed_at": "2026-10-21T13:01:06Z",
+      "stars": 8,
+      "issues": 1,
+      "description": "Save Pinterest boards locally as a single ZIP or resumable Smart parts. A privacy-focused Chrome extension with pin selection and verified downloads.",
+      "created_at": "2026-04-09T10:26:47Z",
+      "head": {
+        "sha": "e7b35b0389868b717ad0817b77540052de0e7bfd",
+        "date": "2026-10-21T13:00:40Z",
+        "url": "https://github.com/thetejasagrawal/Pinterest-LocalBoard/commit/e7b35b0389868b717ad0817b77540052de0e7bfd"
+      }
+    },
+    {
+      "repo": "mujakkirhussen/pin2figma",
+      "url": "https://github.com/mujakkirhussen/pin2figma",
+      "branch": "main",
+      "license": "MIT",
+      "archived": false,
+      "pushed_at": "2026-11-02T15:13:43Z",
+      "stars": 1,
+      "issues": 0,
+      "description": "Click a Pinterest pin, it lands on your Figma canvas. Chrome extension + Figma plugin + tiny local server.",
+      "created_at": "2026-11-01T18:24:08Z",
+      "head": {
+        "sha": "148cb62414bed5311fd847a52f8192eee8947bd4",
+        "date": "2026-11-02T15:13:41Z",
+        "url": "https://github.com/mujakkirhussen/pin2figma/commit/148cb62414bed5311fd847a52f8192eee8947bd4"
+      }
+    },
+    {
+      "repo": "pinry/pinry",
+      "url": "https://github.com/pinry/pinry",
+      "branch": "master",
+      "license": "BSD-2-Clause",
+      "archived": false,
+      "pushed_at": "2026-01-05T16:46:25Z",
+      "stars": 3431,
+      "issues": 66,
+      "description": "Pinry, a tiling image board system for people who want to save, tag, and share images, videos and webpages in an easy to skim through format. It's open-source and self-hosted.",
+      "created_at": "2013-03-05T00:17:31Z",
+      "head": null
+    },
+    {
+      "repo": "JaimeOrtegaxyz/pinrip",
+      "url": "https://github.com/JaimeOrtegaxyz/pinrip",
+      "branch": "main",
+      "license": "MIT",
+      "archived": false,
+      "pushed_at": "2026-10-22T13:05:22Z",
+      "stars": 15,
+      "issues": 1,
+      "description": "Download the images of a Pinterest page (pin, board, search, profile) as full-resolution originals.",
+      "created_at": "2026-07-05T11:20:23Z",
+      "head": {
+        "sha": "61076288a1ccc1aa4742b31da70efbda4b217f5a",
+        "date": "2026-09-16T04:37:48Z",
+        "url": "https://github.com/JaimeOrtegaxyz/pinrip/commit/61076288a1ccc1aa4742b31da70efbda4b217f5a"
+      }
+    },
+    {
+      "repo": "workordie/pinterest-scraper",
+      "url": "https://github.com/workordie/pinterest-scraper",
+      "branch": "main",
+      "license": "MIT",
+      "archived": false,
+      "pushed_at": "2026-03-12T15:28:56Z",
+      "stars": 2,
+      "issues": 0,
+      "description": "Web-based Pinterest image explorer and downloader. Built with Python, Playwright, and aiohttp. For educational use only.",
+      "created_at": "2026-03-12T15:04:53Z",
+      "head": {
+        "sha": "42ed7306e44b6d9fd9d2d53d238537ab08e56ced",
+        "date": "2026-03-12T15:28:53Z",
+        "url": "https://github.com/workordie/pinterest-scraper/commit/42ed7306e44b6d9fd9d2d53d238537ab08e56ced"
+      }
+    }
+  ],
+  "files": [
+    {
+      "repo": "sean1832/pinterest-dl",
+      "path": "README.md",
+      "commit": "ab3914ff33ec800c952e40b8d73278c0621ccf74",
+      "blobSha": "1da80a9b40aef601d4a074b860f9b7d913a20649",
+      "url": "https://github.com/sean1832/pinterest-dl/blob/ab3914ff33ec800c952e40b8d73278c0621ccf74/README.md",
+      "readStatus": "read"
+    },
+    {
+      "repo": "bstoilov/py3-pinterest",
+      "path": "README.md",
+      "commit": "fdbe3bc64e2ec5bf0e58da01be364d81b6ce689d",
+      "blobSha": "239773a702e2940ebce425e813dd16e5ec9a2b60",
+      "url": "https://github.com/bstoilov/py3-pinterest/blob/fdbe3bc64e2ec5bf0e58da01be364d81b6ce689d/README.md",
+      "readStatus": "read"
+    },
+    {
+      "repo": "iamatulsingh/pinscrape",
+      "path": "README.md",
+      "commit": "107e769ae108f4ecd2759762e40e8a108606e624",
+      "blobSha": "c7d71da1a348a37eb6d8a5d7fe99bc1f222eaa5d",
+      "url": "https://github.com/iamatulsingh/pinscrape/blob/107e769ae108f4ecd2759762e40e8a108606e624/README.md",
+      "readStatus": "read"
+    },
+    {
+      "repo": "dessant/search-by-image",
+      "path": "README.md",
+      "commit": "d5d20a64be2fc0fccdedbf52becb0a5f80a83848",
+      "blobSha": "3dd13b83f6c4a2f3c7dc6025574cbfb108518b83",
+      "url": "https://github.com/dessant/search-by-image/blob/d5d20a64be2fc0fccdedbf52becb0a5f80a83848/README.md",
+      "readStatus": "read"
+    },
+    {
+      "repo": "thetejasagrawal/Pinterest-LocalBoard",
+      "path": "README.md",
+      "commit": "e7b35b0389868b717ad0817b77540052de0e7bfd",
+      "blobSha": "634fe671a03ff1a684884e6479a05230500c75f4",
+      "url": "https://github.com/thetejasagrawal/Pinterest-LocalBoard/blob/e7b35b0389868b717ad0817b77540052de0e7bfd/README.md",
+      "readStatus": "read"
+    },
+    {
+      "repo": "mujakkirhussen/pin2figma",
+      "path": "README.md",
+      "commit": "148cb62414bed5311fd847a52f8192eee8947bd4",
+      "blobSha": "9882db5afeb75cc8b0b8da3992329c6fc9a29c30",
+      "url": "https://github.com/mujakkirhussen/pin2figma/blob/148cb62414bed5311fd847a52f8192eee8947bd4/README.md",
+      "readStatus": "read"
+    },
+    {
+      "repo": "JaimeOrtegaxyz/pinrip",
+      "path": "README.md",
+      "commit": "61076288a1ccc1aa4742b31da70efbda4b217f5a",
+      "blobSha": "abff4532a52faa47e425f3de70ce4c81ab526af0",
+      "url": "https://github.com/JaimeOrtegaxyz/pinrip/blob/61076288a1ccc1aa4742b31da70efbda4b217f5a/README.md",
+      "readStatus": "read"
+    },
+    {
+      "repo": "workordie/pinterest-scraper",
+      "path": "README.md",
+      "commit": "42ed7306e44b6d9fd9d2d53d238537ab08e56ced",
+      "blobSha": "305be90c0f100222e6d433e8cdd080fc9b26d84a",
+      "url": "https://github.com/workordie/pinterest-scraper/blob/42ed7306e44b6d9fd9d2d53d238537ab08e56ced/README.md",
+      "readStatus": "read"
+    },
+    {
+      "repo": "MSFT-Innovation-Hub-India/CUA-Trends-Compiler",
+      "path": "README.md",
+      "commit": "69ce85e31c1273b54a6431801d75e1f3679edc4c",
+      "blobSha": "fd7ca4bf74f885866e374b4bbf7ccb15d94d1d77",
+      "url": "https://github.com/MSFT-Innovation-Hub-India/CUA-Trends-Compiler/blob/69ce85e31c1273b54a6431801d75e1f3679edc4c/README.md",
+      "readStatus": "read"
+    },
+    {
+      "repo": "sean1832/pinterest-dl",
+      "path": "pinterest_dl/api/endpoints.py",
+      "commit": "ab3914ff33ec800c952e40b8d73278c0621ccf74",
+      "blobSha": "2049d23cdb62523a1bf46c846291e81dc8e505a5",
+      "url": "https://github.com/sean1832/pinterest-dl/blob/ab3914ff33ec800c952e40b8d73278c0621ccf74/pinterest_dl/api/endpoints.py",
+      "readStatus": "read"
+    },
+    {
+      "repo": "sean1832/pinterest-dl",
+      "path": "pinterest_dl/scrapers/playwright_scraper.py",
+      "commit": "ab3914ff33ec800c952e40b8d73278c0621ccf74",
+      "blobSha": "e6b43e4d80045b864721e5f49da68802030886e6",
+      "url": "https://github.com/sean1832/pinterest-dl/blob/ab3914ff33ec800c952e40b8d73278c0621ccf74/pinterest_dl/scrapers/playwright_scraper.py",
+      "readStatus": "read"
+    },
+    {
+      "repo": "sean1832/pinterest-dl",
+      "path": "pinterest_dl/webdriver/playwright_driver.py",
+      "commit": "ab3914ff33ec800c952e40b8d73278c0621ccf74",
+      "blobSha": "ca362692f139dbbf61530770cc298bca1ef45ad2",
+      "url": "https://github.com/sean1832/pinterest-dl/blob/ab3914ff33ec800c952e40b8d73278c0621ccf74/pinterest_dl/webdriver/playwright_driver.py",
+      "readStatus": "read"
+    },
+    {
+      "repo": "sean1832/pinterest-dl",
+      "path": "pyproject.toml",
+      "commit": "ab3914ff33ec800c952e40b8d73278c0621ccf74",
+      "blobSha": "dd6053c30687f4351570c8a4ebe1a3a8f9489aa6",
+      "url": "https://github.com/sean1832/pinterest-dl/blob/ab3914ff33ec800c952e40b8d73278c0621ccf74/pyproject.toml",
+      "readStatus": "read"
+    },
+    {
+      "repo": "bstoilov/py3-pinterest",
+      "path": "py3pin/Pinterest.py",
+      "commit": "fdbe3bc64e2ec5bf0e58da01be364d81b6ce689d",
+      "blobSha": "86ad79630b2e9e366244388ba9b6562b34feabb8",
+      "url": "https://github.com/bstoilov/py3-pinterest/blob/fdbe3bc64e2ec5bf0e58da01be364d81b6ce689d/py3pin/Pinterest.py",
+      "readStatus": "read"
+    },
+    {
+      "repo": "iamatulsingh/pinscrape",
+      "path": "pinscrape/v2.py",
+      "commit": "107e769ae108f4ecd2759762e40e8a108606e624",
+      "blobSha": "37af5d163c14516347b0746d498b21c3bc8a1fa0",
+      "url": "https://github.com/iamatulsingh/pinscrape/blob/107e769ae108f4ecd2759762e40e8a108606e624/pinscrape/v2.py",
+      "readStatus": "read"
+    },
+    {
+      "repo": "mikf/gallery-dl",
+      "path": "gallery_dl/extractor/pinterest.py",
+      "commit": "811d917b4973ae4f556a760e289784fd4714e2f1",
+      "blobSha": "0f6092ab83209cfe49067c38413465545df37acd",
+      "url": "https://github.com/mikf/gallery-dl/blob/811d917b4973ae4f556a760e289784fd4714e2f1/gallery_dl/extractor/pinterest.py",
+      "readStatus": "read"
+    },
+    {
+      "repo": "dessant/search-by-image",
+      "path": "src/utils/engines.js",
+      "commit": "d5d20a64be2fc0fccdedbf52becb0a5f80a83848",
+      "blobSha": "98620ff5c9462120627d92ece5b56db8154c825e",
+      "url": "https://github.com/dessant/search-by-image/blob/d5d20a64be2fc0fccdedbf52becb0a5f80a83848/src/utils/engines.js",
+      "readStatus": "read"
+    },
+    {
+      "repo": "JaimeOrtegaxyz/pinrip",
+      "path": "pinrip.js",
+      "commit": "61076288a1ccc1aa4742b31da70efbda4b217f5a",
+      "blobSha": "7be5c730c281ab697905c7332c372eda371bc0d8",
+      "url": "https://github.com/JaimeOrtegaxyz/pinrip/blob/61076288a1ccc1aa4742b31da70efbda4b217f5a/pinrip.js",
+      "readStatus": "read"
+    },
+    {
+      "repo": "JaimeOrtegaxyz/pinrip",
+      "path": "package.json",
+      "commit": "61076288a1ccc1aa4742b31da70efbda4b217f5a",
+      "blobSha": "7e8eb95b562b96d6beed5dc9c1b9620c4314b3aa",
+      "url": "https://github.com/JaimeOrtegaxyz/pinrip/blob/61076288a1ccc1aa4742b31da70efbda4b217f5a/package.json",
+      "readStatus": "read"
+    },
+    {
+      "repo": "mujakkirhussen/pin2figma",
+      "path": "server/server.py",
+      "commit": "148cb62414bed5311fd847a52f8192eee8947bd4",
+      "blobSha": "7a338d9fa8c8ff040b7a7e26caa44bc625533ff9",
+      "url": "https://github.com/mujakkirhussen/pin2figma/blob/148cb62414bed5311fd847a52f8192eee8947bd4/server/server.py",
+      "readStatus": "read"
+    },
+    {
+      "repo": "mujakkirhussen/pin2figma",
+      "path": "extension/content.js",
+      "commit": "148cb62414bed5311fd847a52f8192eee8947bd4",
+      "blobSha": "7603224c8034a7912e9ab73d35c11c5b6fc8831f",
+      "url": "https://github.com/mujakkirhussen/pin2figma/blob/148cb62414bed5311fd847a52f8192eee8947bd4/extension/content.js",
+      "readStatus": "read"
+    },
+    {
+      "repo": "mujakkirhussen/pin2figma",
+      "path": "figma-plugin/manifest.json",
+      "commit": "148cb62414bed5311fd847a52f8192eee8947bd4",
+      "blobSha": "9e8e1437d7e01519833e34870d7924ddec1df560",
+      "url": "https://github.com/mujakkirhussen/pin2figma/blob/148cb62414bed5311fd847a52f8192eee8947bd4/figma-plugin/manifest.json",
+      "readStatus": "read"
+    },
+    {
+      "repo": "thetejasagrawal/Pinterest-LocalBoard",
+      "path": "extension/content.js",
+      "commit": "e7b35b0389868b717ad0817b77540052de0e7bfd",
+      "blobSha": "310160934d865c893260ace29de6588b0c25a1ae",
+      "url": "https://github.com/thetejasagrawal/Pinterest-LocalBoard/blob/e7b35b0389868b717ad0817b77540052de0e7bfd/extension/content.js",
+      "readStatus": "read"
+    },
+    {
+      "repo": "workordie/pinterest-scraper",
+      "path": "pin_scraper.py",
+      "commit": "42ed7306e44b6d9fd9d2d53d238537ab08e56ced",
+      "blobSha": "4ccb4b348182e8fb513fdd2fd2cf4737692f8274",
+      "url": "https://github.com/workordie/pinterest-scraper/blob/42ed7306e44b6d9fd9d2d53d238537ab08e56ced/pin_scraper.py",
+      "readStatus": "read"
+    },
+    {
+      "repo": "workordie/pinterest-scraper",
+      "path": "server.py",
+      "commit": "42ed7306e44b6d9fd9d2d53d238537ab08e56ced",
+      "blobSha": "7724a091e94f8f57a8f76b93ca2866ee3df69b4a",
+      "url": "https://github.com/workordie/pinterest-scraper/blob/42ed7306e44b6d9fd9d2d53d238537ab08e56ced/server.py",
+      "readStatus": "read"
+    },
+    {
+      "repo": "sean1832/pinterest-dl",
+      "path": "LICENSE",
+      "commit": "ab3914ff33ec800c952e40b8d73278c0621ccf74",
+      "blobSha": "5dfe350f3d774834104c7d078eadc149420106b5",
+      "url": "https://github.com/sean1832/pinterest-dl/blob/ab3914ff33ec800c952e40b8d73278c0621ccf74/LICENSE",
+      "readStatus": "read"
+    },
+    {
+      "repo": "sean1832/pinterest-dl",
+      "path": "doc/TESTING.md",
+      "commit": "ab3914ff33ec800c952e40b8d73278c0621ccf74",
+      "blobSha": "11179ec6ad06718509a2d626da60b56e11f8b860",
+      "url": "https://github.com/sean1832/pinterest-dl/blob/ab3914ff33ec800c952e40b8d73278c0621ccf74/doc/TESTING.md",
+      "readStatus": "read"
+    },
+    {
+      "repo": "sean1832/pinterest-dl",
+      "path": "tests/integration/test_pinterest_live.py",
+      "commit": "ab3914ff33ec800c952e40b8d73278c0621ccf74",
+      "blobSha": "73d4d86fb78dcd3c78fb904cee808fb91f0c9b71",
+      "url": "https://github.com/sean1832/pinterest-dl/blob/ab3914ff33ec800c952e40b8d73278c0621ccf74/tests/integration/test_pinterest_live.py",
+      "readStatus": "read"
+    },
+    {
+      "repo": "mikf/gallery-dl",
+      "path": "LICENSE",
+      "commit": "811d917b4973ae4f556a760e289784fd4714e2f1",
+      "blobSha": "d159169d1050894d3ea3b98e1c965c4058208fe1",
+      "url": "https://github.com/mikf/gallery-dl/blob/811d917b4973ae4f556a760e289784fd4714e2f1/LICENSE",
+      "readStatus": "read"
+    },
+    {
+      "repo": "bstoilov/py3-pinterest",
+      "path": "LICENSE",
+      "commit": "fdbe3bc64e2ec5bf0e58da01be364d81b6ce689d",
+      "blobSha": "62e4f43bf5dddf29abf6dfdd1f2053bb80008d0e",
+      "url": "https://github.com/bstoilov/py3-pinterest/blob/fdbe3bc64e2ec5bf0e58da01be364d81b6ce689d/LICENSE",
+      "readStatus": "read"
+    },
+    {
+      "repo": "iamatulsingh/pinscrape",
+      "path": "LICENSE",
+      "commit": "107e769ae108f4ecd2759762e40e8a108606e624",
+      "blobSha": "1d799814c2986651b9a8e3c4baa36359745ff837",
+      "url": "https://github.com/iamatulsingh/pinscrape/blob/107e769ae108f4ecd2759762e40e8a108606e624/LICENSE",
+      "readStatus": "read"
+    },
+    {
+      "repo": "mujakkirhussen/pin2figma",
+      "path": "LICENSE",
+      "commit": "148cb62414bed5311fd847a52f8192eee8947bd4",
+      "blobSha": "0f6271898c3c96c493cde773f5c1fe1432e1368c",
+      "url": "https://github.com/mujakkirhussen/pin2figma/blob/148cb62414bed5311fd847a52f8192eee8947bd4/LICENSE",
+      "readStatus": "read"
+    },
+    {
+      "repo": "thetejasagrawal/Pinterest-LocalBoard",
+      "path": "LICENSE",
+      "commit": "e7b35b0389868b717ad0817b77540052de0e7bfd",
+      "blobSha": "c2e9e5972f7e01ea01f6e5b1adc3a20bc8acf3c6",
+      "url": "https://github.com/thetejasagrawal/Pinterest-LocalBoard/blob/e7b35b0389868b717ad0817b77540052de0e7bfd/LICENSE",
+      "readStatus": "read"
+    },
+    {
+      "repo": "JaimeOrtegaxyz/pinrip",
+      "path": "LICENSE",
+      "commit": "61076288a1ccc1aa4742b31da70efbda4b217f5a",
+      "blobSha": "bb6db865ef479889e920be3e2101693cddee7176",
+      "url": "https://github.com/JaimeOrtegaxyz/pinrip/blob/61076288a1ccc1aa4742b31da70efbda4b217f5a/LICENSE",
+      "readStatus": "read"
+    },
+    {
+      "repo": "dessant/search-by-image",
+      "path": "src/utils/data.js",
+      "commit": "d5d20a64be2fc0fccdedbf52becb0a5f80a83848",
+      "blobSha": "9d18703eb0a0c8b55086cd1a793a6b35d7cc6a26",
+      "url": "https://github.com/dessant/search-by-image/blob/d5d20a64be2fc0fccdedbf52becb0a5f80a83848/src/utils/data.js",
+      "readStatus": "read"
+    },
+    {
+      "repo": "dessant/search-by-image",
+      "path": "LICENSE",
+      "commit": "d5d20a64be2fc0fccdedbf52becb0a5f80a83848",
+      "blobSha": "94a9ed024d3859793618152ea559a168bbcbb5e2",
+      "url": "https://github.com/dessant/search-by-image/blob/d5d20a64be2fc0fccdedbf52becb0a5f80a83848/LICENSE",
+      "readStatus": "read"
+    }
+  ],
+  "decision": {
+    "base": "Own small Node.js Playwright adapter plus existing validated G1 normalizer/downloader; no third-party Pinterest scraper adopted",
+    "alternative": "sean1832/pinterest-dl 1.3.0 for a later isolated comparison",
+    "externalLens": "Native UI route retained; no claim that unofficial extension endpoint works now"
+  },
+  "limits": [
+    "No live side-by-side benchmark of external tools",
+    "Stars, issues and push dates are snapshots, not reliability scores",
+    "Open-source license does not confer Pinterest service access or rights to images",
+    "No paid API or AI calls made"
+  ],
+  "officialSources": [
+    {
+      "url": "https://policy.pinterest.com/en/terms-of-service",
+      "note": "Current terms; page announces separate update effective 2026-11-12"
+    },
+    {
+      "url": "https://developers.pinterest.com/terms/"
+    },
+    {
+      "url": "https://github.com/pinterest/pinterest-python-generated-api-client/blob/main/docs/SearchApi.md"
+    },
+    {
+      "url": "https://github.com/pinterest/pinterest-python-generated-api-client/blob/main/docs/PinsApi.md#pins_save"
+    },
+    {
+      "url": "https://playwright.dev/docs/auth"
+    },
+    {
+      "url": "https://playwright.dev/docs/api/class-browsertype#browser-type-launch-persistent-context"
+    }
+  ]
+}

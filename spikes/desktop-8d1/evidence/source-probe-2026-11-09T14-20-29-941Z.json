@@ -1,0 +1,59 @@
+{
+  "ok": true,
+  "startedAt": "2026-11-09T14:20:29.941Z",
+  "root": "C:\\Users\\USER\\AppData\\Local\\PMA-проба 8D1",
+  "checks": [
+    {
+      "name": "runtime",
+      "ok": true,
+      "ms": 0,
+      "node": "24.22.2",
+      "electron": "45.2.3",
+      "chrome": "156.0.8078.80",
+      "type": "utility",
+      "execPath": "C:\\Vibe Projects (Pet)\\PINTEREST MOODBOARD AUTO\\spikes\\desktop-8d1\\node_modules\\electron\\dist\\electron.exe",
+      "platform": "win32",
+      "arch": "x64",
+      "pathHasNode": true
+    },
+    {
+      "name": "esm-import",
+      "ok": true,
+      "ms": 0,
+      "marker": "probe-lib-loaded",
+      "workerUrl": "file:///C:/Vibe%20Projects%20(Pet)/PINTEREST%20MOODBOARD%20AUTO/spikes/desktop-8d1/worker.mjs"
+    },
+    {
+      "name": "sqlite",
+      "ok": true,
+      "ms": 0,
+      "file": "C:\\Users\\USER\\AppData\\Local\\PMA-проба 8D1\\data\\pma.sqlite",
+      "launchesSoFar": 1,
+      "integrity": "ok"
+    },
+    {
+      "name": "files-unicode-path",
+      "ok": true,
+      "ms": 0,
+      "file": "C:\\Users\\USER\\AppData\\Local\\PMA-проба 8D1\\data\\файлы с пробелом\\проба изображения.bin",
+      "sha256": "d67c656e01756650d77717b0839985a056ec28ffe174601d690fc407a2ceffca"
+    },
+    {
+      "name": "chrome-playwright",
+      "ok": true,
+      "ms": 0,
+      "profile": "C:\\Users\\USER\\AppData\\Local\\PMA-проба 8D1\\profiles\\проба профиль",
+      "browser": "157.0.8103.38",
+      "profileFiles": 15
+    }
+  ],
+  "main": {
+    "execPath": "C:\\Vibe Projects (Pet)\\PINTEREST MOODBOARD AUTO\\spikes\\desktop-8d1\\node_modules\\electron\\dist\\electron.exe",
+    "resourcesPath": "C:\\Vibe Projects (Pet)\\PINTEREST MOODBOARD AUTO\\spikes\\desktop-8d1\\node_modules\\electron\\dist\\resources",
+    "packaged": false,
+    "argv": [
+      ".",
+      "--exit-after-probe"
+    ]
+  }
+}

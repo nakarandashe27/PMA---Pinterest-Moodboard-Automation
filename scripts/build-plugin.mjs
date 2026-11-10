@@ -1,0 +1,10 @@
+import fs from 'node:fs/promises';
+import {sha256Bytes} from '../spikes/figma-g1/sha256.mjs';
+const core=(await fs.readFile('spikes/figma-g1/build-frame.mjs','utf8')).replace('export async function','async function');
+const handler=await fs.readFile('spikes/figma-g1/plugin/handler.js','utf8');
+const managed=(await fs.readFile('spikes/figma-g1/import-managed.mjs','utf8')).replace('export function','function');
+await fs.writeFile('spikes/figma-g1/plugin/code.js',core+'\n'+managed+'\n'+handler);
+const ui=await fs.readFile('spikes/figma-g1/plugin/ui.template.html','utf8');
+if(ui.split('/*PMA_SHA256*/').length!==2)throw Error('Expected one SHA-256 placeholder in plugin UI template');
+await fs.writeFile('spikes/figma-g1/plugin/ui.html',ui.replace('/*PMA_SHA256*/',sha256Bytes.toString()));
+console.log('Figma plugin rebuilt.');

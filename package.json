@@ -1,0 +1,101 @@
+{
+  "name": "pma-local",
+  "productName": "PMA",
+  "version": "0.1.0",
+  "description": "PMA — подборки референсов Pinterest для ландшафтного бюро",
+  "author": "PMA",
+  "private": true,
+  "type": "module",
+  "main": "desktop/main.mjs",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "tsc -b && vite build",
+    "start": "node server/index.mjs",
+    "password": "node scripts/local-password.mjs",
+    "test": "node --test server/test/*.test.mjs spikes/pinterest-g1/test/*.test.mjs",
+    "desktop": "npm run build && electron desktop/main.mjs",
+    "desktop:smoke": "npm run build && node desktop/smoke.mjs",
+    "desktop:dist": "npm run build && node scripts/build-plugin.mjs && electron-builder --win nsis --x64 && node scripts/verify-package.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.64.1"
+  },
+  "devDependencies": {
+    "@fontsource/inter": "5.3.0",
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.2.1",
+    "electron": "45.2.3",
+    "electron-builder": "26.18.0",
+    "lucide-react": "1.67.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.5"
+  },
+  "build": {
+    "appId": "local.pma.desktop",
+    "productName": "PMA",
+    "executableName": "PMA",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "package.json",
+      "desktop/main.mjs",
+      "desktop/worker.mjs",
+      "desktop/preload.cjs",
+      "desktop/ipc-policy.mjs",
+      "desktop/process-tree.mjs",
+      "server/*.mjs",
+      "!server/index.mjs",
+      "spikes/pinterest-g1/pins.mjs",
+      "spikes/pinterest-g1/extract-dom.mjs",
+      "dist/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "design/pma-desktop-icon.ico",
+        "to": "icon.ico"
+      },
+      {
+        "from": "spikes/figma-g1/plugin",
+        "to": "figma-plugin",
+        "filter": [
+          "manifest.json",
+          "code.js",
+          "ui.html"
+        ]
+      }
+    ],
+    "asar": true,
+    "electronFuses": {
+      "runAsNode": false,
+      "enableNodeOptionsEnvironmentVariable": false,
+      "enableCookieEncryption": true,
+      "onlyLoadAppFromAsar": true,
+      "enableEmbeddedAsarIntegrityValidation": true
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "design/pma-desktop-icon.ico",
+      "signExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false,
+      "installerIcon": "design/pma-desktop-icon.ico",
+      "uninstallerIcon": "design/pma-desktop-icon.ico",
+      "artifactName": "PMA-Setup-${version}-x64.${ext}",
+      "shortcutName": "PMA",
+      "packElevateHelper": false
+    }
+  }
+}

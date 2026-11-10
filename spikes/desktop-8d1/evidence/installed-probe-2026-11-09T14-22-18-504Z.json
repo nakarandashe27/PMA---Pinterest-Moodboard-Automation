@@ -1,0 +1,56 @@
+{
+  "ok": true,
+  "startedAt": "2026-11-09T14:22:18.504Z",
+  "root": "C:\\Users\\USER\\AppData\\Local\\PMA-проба 8D1",
+  "checks": [
+    {
+      "name": "runtime",
+      "ok": true,
+      "ms": 0,
+      "node": "24.22.2",
+      "electron": "45.2.3",
+      "chrome": "156.0.8078.80",
+      "type": "utility",
+      "execPath": "C:\\Users\\USER\\AppData\\Local\\Programs\\PMA Проба с пробелом\\PMA-Probe-8D1.exe",
+      "platform": "win32",
+      "arch": "x64",
+      "pathHasNode": true
+    },
+    {
+      "name": "esm-import",
+      "ok": true,
+      "ms": 0,
+      "marker": "probe-lib-loaded",
+      "workerUrl": "file:///C:/Users/USER/AppData/Local/Programs/PMA%20%D0%9F%D1%80%D0%BE%D0%B1%D0%B0%20%D1%81%20%D0%BF%D1%80%D0%BE%D0%B1%D0%B5%D0%BB%D0%BE%D0%BC/resources/app.asar/worker.mjs"
+    },
+    {
+      "name": "sqlite",
+      "ok": true,
+      "ms": 7,
+      "file": "C:\\Users\\USER\\AppData\\Local\\PMA-проба 8D1\\data\\pma.sqlite",
+      "launchesSoFar": 4,
+      "integrity": "ok"
+    },
+    {
+      "name": "files-unicode-path",
+      "ok": true,
+      "ms": 2,
+      "file": "C:\\Users\\USER\\AppData\\Local\\PMA-проба 8D1\\data\\файлы с пробелом\\проба изображения.bin",
+      "sha256": "d67c656e01756650d77717b0839985a056ec28ffe174601d690fc407a2ceffca"
+    },
+    {
+      "name": "chrome-playwright",
+      "ok": true,
+      "ms": 536,
+      "profile": "C:\\Users\\USER\\AppData\\Local\\PMA-проба 8D1\\profiles\\проба профиль",
+      "browser": "157.0.8103.38",
+      "profileFiles": 16
+    }
+  ],
+  "main": {
+    "execPath": "C:\\Users\\USER\\AppData\\Local\\Programs\\PMA Проба с пробелом\\PMA-Probe-8D1.exe",
+    "resourcesPath": "C:\\Users\\USER\\AppData\\Local\\Programs\\PMA Проба с пробелом\\resources",
+    "packaged": true,
+    "argv": []
+  }
+}

@@ -1,0 +1,61 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><style>
+body{font:13px Inter,Arial,sans-serif;margin:20px;color:#263f32}h2{font-size:19px;margin:0 0 12px}p{line-height:1.5}label{display:block;font-weight:500;margin-top:14px}input{box-sizing:border-box;width:100%;border:1px solid #ccd7c5;border-radius:7px;padding:10px;margin-top:7px;font:12px monospace}button{display:block;width:100%;padding:11px;margin:12px 0;border:0;border-radius:8px;background:#263f32;color:white;font:inherit;cursor:pointer}button:disabled{opacity:.45}small{color:#788071;line-height:1.6;display:block;margin-top:7px}#status{white-space:pre-wrap;padding:12px;background:#eef3e8;border-radius:8px;line-height:1.5}
+</style><h2>Импорт подборки PMA</h2><p>Откройте нужный файл Figma Design. Код из PMA открывает только зафиксированный выбранный набор.</p><label>Код подключения из PMA<input id="code" placeholder="Вставьте код" autocomplete="off" spellcheck="false"></label><button id="load">Загрузить и сверить подборку</button><button id="create" disabled>Создать или завершить фрейм</button><div id="status">Сервис PMA должен быть запущен на этом ПК.</div><small>При повторе проверяются изображения, ссылки и ручные изменения. Новый фрейм после конфликта создаётся только отдельной попыткой из PMA.</small><script>
+let payload=null,loadedCode='',lease='',context=null;
+const status=document.getElementById('status'),load=document.getElementById('load'),create=document.getElementById('create'),code=document.getElementById('code'),requests=new Map();
+const channel='pma-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2)+Math.random().toString(36).slice(2);
+code.oninput=()=>{payload=null;create.disabled=true;status.textContent='Код изменён. Загрузите и сверьте новую подборку.';};
+function rpc(type,payload){return new Promise((resolve,reject)=>{const requestId='rpc-'+Date.now()+'-'+Math.random();requests.set(requestId,{resolve,reject});parent.postMessage({pluginMessage:{type,payload,requestId,channel}},'*');setTimeout(()=>{if(requests.delete(requestId))reject(Error('Плагин не ответил вовремя. Повтор требует сверки.'));},90000);});}
+async function api(route,body){
+ const r=await fetch('http://localhost:8787/api/figma/'+route+'?protocol=2',{method:body?'POST':'GET',headers:{Authorization:'Bearer '+loadedCode,...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined,signal:AbortSignal.timeout(30000)});
+ if(!r.ok){let message='HTTP '+r.status;try{message=(await r.json()).error||message;}catch{}throw Error(message);}return r.json();
+}
+/*PMA_SHA256*/
+async function compatiblePin(pin){
+ const bytes=Uint8Array.from(atob(pin.imageBase64),c=>c.charCodeAt(0));
+ const hash=sha256Bytes(bytes);
+ if(hash!==pin.assetSha256)throw Error('Файл изображения не совпал со снимком PMA');
+ if(!pin.imageBase64.startsWith('UklGR'))return pin;
+ const image=new Image();image.src='data:image/webp;base64,'+pin.imageBase64;await image.decode();
+ const canvas=document.createElement('canvas');canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;
+ if(canvas.width*canvas.height>40000000)throw Error('Изображение слишком большое для импорта');
+ canvas.getContext('2d').drawImage(image,0,0);return {...pin,imageBase64:canvas.toDataURL('image/png').split(',')[1]};
+}
+async function receipt(result){return api('receipt',{...result,snapshotHash:payload.snapshotHash,lease});}
+load.onclick=async()=>{
+ load.disabled=true;code.disabled=true;create.disabled=true;payload=null;lease='';status.textContent='Получаем набор из PMA…';
+ try{
+  loadedCode=code.value.trim();if(!loadedCode)throw Error('Вставьте код из PMA');
+  const p=await api('package');if(p.pmaPackageVersion!==2||!Array.isArray(p.pins)||!p.pins.length||p.pins.length>25)throw Error('Обновите PMA и плагин: нужен пакет версии 2');
+  let checked=0;status.textContent='Проверяем изображения: 0 из '+p.pins.length;
+  p.pins=await Promise.all(p.pins.map(async pin=>{const result=await compatiblePin(pin);status.textContent='Проверяем изображения: '+(++checked)+' из '+p.pins.length;return result;}));payload=p;
+  status.textContent='Сверяем набор с открытым файлом Figma…';context=await rpc('inspect-pma',payload);
+  status.textContent='Набор: '+payload.name+'\nИзображений: '+payload.pins.length+'\nОткрытый файл: '+context.fileName;
+  if(context.status==='conflict'){await receipt({...context,status:'conflict'});status.textContent+='\nКонфликт: '+context.message;return;}
+  if(context.status==='complete'){await receipt({...context,status:'already-imported'});status.textContent+='\nИзображения и ссылки сверены. Этот набор уже есть в файле; дубликат не создан.\nФрейм: '+context.frameId;return;}
+  status.textContent+=context.status==='partial'?'\nНайдена неизменённая незавершённая структура. Можно заполнить недостающие изображения.':'\nМожно создать отдельный фрейм.';create.disabled=false;
+ }catch(e){status.textContent='Не удалось завершить сверку: '+e.message;}finally{load.disabled=false;code.disabled=false;}
+};
+create.onclick=async()=>{
+ if(!payload)return;load.disabled=true;code.disabled=true;create.disabled=true;status.textContent='Создаём или завершаем отдельные изображения и ссылки…';
+ try{
+  context=await rpc('inspect-pma',payload);
+  if(context.status==='conflict')throw Error(context.message);
+  if(context.status==='complete'){await receipt({...context,status:'already-imported'});status.textContent='Этот набор уже есть в файле. Дубликат не создан.\nФрейм: '+context.frameId;return;}
+  lease=(await api('claim',{documentId:context.documentId,fileKey:context.fileKey,frameId:context.frameId})).lease;
+  const result=await rpc('import-pma',payload);await receipt(result);
+  status.textContent='Сверено '+result.items.length+' изображений и ссылок.\nФайл: '+result.fileName+'\nФрейм: '+result.frameId+'\nPMA получил подтверждение.';
+ }catch(e){status.textContent='Импорт остановлен: '+e.message+'\nЗагрузите и сверьте набор перед повтором.';if(context&&lease){try{await receipt({...context,status:'unknown',message:e.message});}catch{status.textContent+='\nPMA не получил статус; результат нужно сверить.';}}}
+ finally{load.disabled=false;code.disabled=false;}
+};
+onmessage=async event=>{
+ // Figma may relay messages through ancestor frames or dispatch a synthetic event.
+ // Match this UI instance and a pending request instead of assuming event.source.
+ const m=event.data?.pluginMessage;if(!m||m.channel!==channel)return;
+ if(m.type==='checkpoint'){
+  let error;try{await api('checkpoint',{documentId:context.documentId,fileKey:context.fileKey,lease,frameId:m.frameId});}catch(e){error=e.message;}
+  parent.postMessage({pluginMessage:{type:'checkpoint-result',requestId:m.requestId,error,channel}},'*');return;
+ }
+ const request=requests.get(m.requestId);if(request){requests.delete(m.requestId);m.error?request.reject(Error(m.error)):request.resolve(m.result);}
+};
+</script></html>
