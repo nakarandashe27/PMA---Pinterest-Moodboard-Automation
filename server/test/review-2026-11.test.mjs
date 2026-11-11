@@ -72,6 +72,10 @@ test('R5: dialogs keep a draft on a click in their own padding or a drag-out; na
   await page.locator('.connection-list > div').filter({hasText:'Test a'}).getByRole('button',{name:'Открыть',exact:true}).click();
   await page.getByLabel('Локальный пароль PMA',{exact:true}).fill('test-password-a');await page.getByRole('button',{name:'Открыть свои проекты'}).click();
   const group=page.getByRole('group',{name:'Показать изображения'});await group.waitFor();
+  // Escape returns keyboard focus to the control that opened the dialog, not to <body>.
+  const opener=page.getByRole('button',{name:'Управление подключением Pinterest'});await opener.focus();await page.keyboard.press('Enter');
+  await page.getByRole('dialog',{name:'Подключение Pinterest'}).waitFor();await page.keyboard.press('Escape');await page.getByRole('dialog').waitFor({state:'hidden'});
+  assert.equal(await opener.evaluate(el=>el===document.activeElement),true,'focus back on the opener');
   assert.equal(await page.getByRole('tab').count(),0,'no tab roles without tab panels');
   assert.equal(await group.getByRole('button',{name:/^Все/}).getAttribute('aria-pressed'),'true');
   await group.getByRole('button',{name:/^Выбранные/}).click();assert.equal(await group.getByRole('button',{name:/^Выбранные/}).getAttribute('aria-pressed'),'true');
