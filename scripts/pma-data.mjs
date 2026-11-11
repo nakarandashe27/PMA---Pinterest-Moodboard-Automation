@@ -8,8 +8,9 @@ import {resolveRoot,layout,ensureLayout,acquireInstanceLock,createBackup,listBac
 const [command,arg]=process.argv.slice(2),paths=layout(resolveRoot());
 const mb=n=>Math.round(n/1048576)+' МБ';
 if(!['status','backup','list','restore'].includes(command)){console.log('Команды: status | backup | list | restore <id>');process.exit(2);}
-ensureLayout(paths);
-const lock=acquireInstanceLock(paths.root);
+let lock;
+// Open PMA (or another operator run) holds the lock: say so plainly, without a stack trace.
+try{ensureLayout(paths);lock=acquireInstanceLock(paths.root);}catch(error){console.error(error.message);process.exit(1);}
 try{
   if(command==='status'){
     const disk=diskStatus(paths),file=path.join(paths.data,'pma.sqlite');let version='нет базы';

@@ -43,9 +43,11 @@ export class Ledger {
   }
   lastSeq(){return this.db.prepare('SELECT coalesce(max(seq),0) AS seq FROM reservations').get().seq;}
   has(id){return !!this.db?.prepare('SELECT 1 FROM reservations WHERE id=?').get(id);}
-  usedInMonth(month){return this.db.prepare('SELECT coalesce(sum(amount),0) AS n FROM reservations WHERE month=?').get(month).n;}
+  // A lost ledger has no database: nothing is readable, so the view reports 0 calls and no spend while paid AI stays closed.
+  usedInMonth(month){if(!this.db)return 0;return this.db.prepare('SELECT coalesce(sum(amount),0) AS n FROM reservations WHERE month=?').get(month).n;}
   // Owner spending this month: settled cost where known, otherwise the reserved upper bound.
   monthSpend(connectionId,month){
+    if(!this.db)return [];
     return this.db.prepare('SELECT currency,coalesce(sum(coalesce(actual_micros,reserved_micros)),0) AS micros,count(*) AS calls FROM reservations WHERE connection_id=? AND month=? AND currency IS NOT NULL GROUP BY currency').all(connectionId,month).map(r=>({currency:r.currency,micros:r.micros,calls:r.calls}));
   }
   // Atomic claim of one slot within the monthly call pool and, for paid calls, the owner's money limit.

@@ -15,7 +15,11 @@ export function publicAddress(ip){
   if(net.isIPv6(ip)){
     const v=ip.toLowerCase();
     const mapped=v.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/);if(mapped)return publicAddress(mapped[1]);
-    return !(v==='::'||v==='::1'||/^f[cd]/.test(v)||/^fe[89ab]/.test(v)||/^ff/.test(v)||v.startsWith('64:ff9b:')||v.startsWith('2001:db8'));
+    // WHATWG URL writes [::ffff:127.0.0.1] as [::ffff:7f00:1]; read the embedded IPv4 in that form too.
+    const hex=v.match(/^::ffff:([0-9a-f]{1,4}):([0-9a-f]{1,4})$/);
+    if(hex){const [hi,lo]=hex.slice(1).map(x=>parseInt(x,16));return publicAddress([hi>>8,hi&255,lo>>8,lo&255].join('.'));}
+    // fec0::/10 is the deprecated site-local range: private, like fe80::/10.
+    return !(v==='::'||v==='::1'||/^f[cd]/.test(v)||/^fe[89a-f]/.test(v)||/^ff/.test(v)||v.startsWith('64:ff9b:')||v.startsWith('2001:db8'));
   }
   return false;
 }

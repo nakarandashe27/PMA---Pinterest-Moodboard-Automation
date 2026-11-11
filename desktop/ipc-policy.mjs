@@ -47,7 +47,8 @@ export function apiRequest(input){
 export function protocolTarget(url){
   let parsed;try{parsed=new URL(url);}catch{return {kind:'deny'};}
   if(parsed.protocol!=='app:'||parsed.host!=='pma'||parsed.search||parsed.hash)return {kind:'deny'};
-  const route=decodeURIComponent(parsed.pathname);
+  // Malformed percent-encoding is refused, not thrown into protocol/navigation handlers.
+  let route;try{route=decodeURIComponent(parsed.pathname);}catch{return {kind:'deny'};}
   if(MEDIA.some(r=>r.test(route)))return {kind:'media',route};
   if(route==='/'||route==='/index.html')return {kind:'static',file:'index.html'};
   if(/^\/assets\/[A-Za-z0-9_.-]+$/.test(route)&&!route.includes('..'))return {kind:'static',file:route.slice(1)};

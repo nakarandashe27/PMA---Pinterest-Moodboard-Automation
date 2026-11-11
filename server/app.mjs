@@ -57,7 +57,10 @@ async function readHttpBody(req){
   if(!req.headers['content-type']?.startsWith('application/json'))throw new AppError('Ожидался JSON',415);
   let length=0;const chunks=[];
   for await(const chunk of req){length+=chunk.length;if(length>BODY_LIMIT)throw new AppError('Запрос слишком большой',413);chunks.push(chunk);}
-  try{return JSON.parse(Buffer.concat(chunks).toString('utf8'));}catch{throw new AppError('Некорректный JSON');}
+  let data;try{data=JSON.parse(Buffer.concat(chunks).toString('utf8'));}catch{throw new AppError('Некорректный JSON');}
+  // Same contract as desktop IPC: every body is a JSON object, so null/array/scalar never reach a handler.
+  if(!data||typeof data!=='object'||Array.isArray(data))throw new AppError('Ожидался JSON-объект');
+  return data;
 }
 async function body(read){
   const owner=activeId(),data=await read();
