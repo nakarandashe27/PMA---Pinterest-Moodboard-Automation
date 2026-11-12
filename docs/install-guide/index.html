@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><title>PMA — установка за 30 минут</title>
+<style>
+@font-face{font-family:Inter;font-weight:200;src:url(fonts/inter-cyrillic-200-normal.woff2);unicode-range:U+0400-045F,U+2116}
+@font-face{font-family:Inter;font-weight:300;src:url(fonts/inter-cyrillic-300-normal.woff2);unicode-range:U+0400-045F,U+2116}
+@font-face{font-family:Inter;font-weight:400;src:url(fonts/inter-cyrillic-400-normal.woff2);unicode-range:U+0400-045F,U+2116}
+@font-face{font-family:Inter;font-weight:600;src:url(fonts/inter-cyrillic-600-normal.woff2);unicode-range:U+0400-045F,U+2116}
+@font-face{font-family:Inter;font-weight:200;src:url(fonts/inter-latin-200-normal.woff2);unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF}
+@font-face{font-family:Inter;font-weight:300;src:url(fonts/inter-latin-300-normal.woff2);unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF}
+@font-face{font-family:Inter;font-weight:400;src:url(fonts/inter-latin-400-normal.woff2);unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF}
+@font-face{font-family:Inter;font-weight:600;src:url(fonts/inter-latin-600-normal.woff2);unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF}
+@page{size:297mm 210mm;margin:0}
+/* Palette and type follow derevopark.com: graphite + forest planes, thin uppercase grotesque, hairlines, bronze accent. */
+:root{--graphite:#222222;--forest:#28352c;--paper:#f5f5f5;--muted:#9b9888;--line:#ffffff26;--bronze:#8f7a63;--bronze-l:#c9b49a}
+*{box-sizing:border-box;margin:0}
+body{font-family:Inter,"Segoe UI",sans-serif;color:var(--paper);-webkit-print-color-adjust:exact;print-color-adjust:exact;background:#111}
+.slide{width:297mm;height:210mm;padding:12mm 16mm 13mm;position:relative;overflow:hidden;page-break-after:always;background:var(--graphite);display:flex;flex-direction:column}
+.slide:last-child{page-break-after:auto}
+.slide.forest{background:var(--forest)}
+.head{display:flex;justify-content:space-between;align-items:flex-start;height:14mm;flex:none}
+.logo{position:relative;font-weight:300;font-size:16px;letter-spacing:.14em;line-height:1.05;text-transform:uppercase}
+.logo::after{content:"";position:absolute;left:46px;top:-6px;width:1px;height:44px;background:var(--paper);transform:rotate(24deg)}
+.label{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;align-items:flex-end;gap:20px;margin:2mm 0 4mm;flex:none}
+.nav .cur{font-weight:200;font-size:44px;line-height:.9}
+.nav .bar{width:140px;height:1px;background:var(--paper);margin-bottom:8px}
+.nav span{font-weight:200;font-size:19px;color:var(--muted);margin-bottom:2px}
+h1{font-weight:300;text-transform:uppercase;font-size:40px;line-height:1.08}
+h2{font-weight:300;text-transform:uppercase;font-size:38px;line-height:1.1;margin-bottom:7mm}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12mm;flex:1;min-height:0}
+.steps{border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:46px 1fr;gap:10px;padding:15px 0;border-bottom:1px solid var(--line)}
+.step .n{font-weight:200;font-size:30px;line-height:1;color:var(--bronze-l)}
+.step p{font-weight:300;font-size:19px;line-height:1.5}
+.step small{display:block;color:var(--muted);font-size:14.5px;margin-top:2px;line-height:1.35}
+b.k{font-weight:400;font-size:.76em;letter-spacing:.07em;text-transform:uppercase;color:var(--paper);background:var(--bronze);padding:3px 8px;white-space:nowrap;position:relative;top:-1px}
+code{font-family:Consolas,monospace;font-size:.9em;color:var(--bronze-l);white-space:nowrap}
+.done{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--bronze);margin-top:5mm;padding-top:9px;font-weight:300;font-size:17px;color:var(--bronze-l);text-transform:uppercase;letter-spacing:.03em;flex:none}
+.done i{font-style:normal;font-weight:200;font-size:28px;line-height:1}
+.hint{font-size:14.5px;color:var(--muted);line-height:1.45;margin-top:10px;padding-left:12px;border-left:1px solid var(--bronze)}
+.shotwrap{display:flex;flex-direction:column;align-items:flex-start;min-height:0}
+.shot{display:block;max-width:100%;max-height:128mm;object-fit:contain;border:1px solid var(--line)}
+.cap{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:7px}
+/* cover */
+.cover h1{font-size:72px;line-height:.98;margin-top:10mm}
+.cover .sub{font-weight:300;font-size:19px;color:var(--muted);margin-top:5mm;line-height:1.4}
+.route{display:flex;margin-top:auto;border-top:1px solid var(--line)}
+.route div{flex:1;padding:10px 12px 0 0;font-weight:300;font-size:13.5px;text-transform:uppercase;letter-spacing:.06em}
+.route div span{display:block;font-weight:200;font-size:30px;color:var(--bronze-l);margin-bottom:4px}
+.route .opt{color:var(--muted)}
+.need{display:grid;grid-template-columns:repeat(4,1fr);gap:8mm;margin-top:auto;margin-bottom:8mm}
+.need div{border-top:1px solid var(--line);padding-top:8px;font-weight:300;font-size:14px;text-transform:uppercase;letter-spacing:.04em;line-height:1.35}
+.need small{display:block;text-transform:none;letter-spacing:0;color:var(--muted);font-size:12.5px;margin-top:3px}
+.stat{position:absolute;right:16mm;top:44mm;display:flex;align-items:center;gap:14px}
+.stat .big{font-weight:200;font-size:120px;line-height:.85;position:relative;padding-right:30px}
+.stat .big::after{content:"";position:absolute;right:6px;top:-8px;width:1px;height:126px;background:var(--paper);transform:rotate(24deg)}
+.stat .t{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);line-height:1.45}
+/* windows mock */
+.win{display:flex;gap:14px;align-items:center;margin-top:60px}
+.pane{flex:1;background:#0b5cad;color:#fff;padding:16px 18px;font-size:14.5px;line-height:1.4;min-height:170px}
+.pane h4{font-size:17px;font-weight:600;margin-bottom:6px}
+.pane .lnk{text-decoration:underline;font-weight:600;outline:2px solid var(--bronze-l);outline-offset:3px}
+.pane .btn{display:inline-block;margin-top:9px;border:1px solid #fff;padding:4px 10px;outline:2px solid var(--bronze-l);outline-offset:3px;font-weight:600}
+.pane .btn2{display:inline-block;margin-top:9px;margin-left:8px;border:1px solid #ffffff88;padding:4px 10px}
+.win .arr{font-weight:200;font-size:30px;color:var(--bronze-l)}
+/* AI values */
+.vals{display:grid;grid-template-columns:1fr 1fr;column-gap:10mm;border-top:1px solid var(--line);margin-top:13mm}
+.val{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.val span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.val strong{font-family:Consolas,monospace;font-weight:400;font-size:17px;white-space:nowrap}
+.val.wide{grid-column:1/3}
+/* help */
+.rows{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:1fr 1.3fr 30px;gap:10mm;padding:17px 0;border-bottom:1px solid var(--line);align-items:center}
+.row .q{font-weight:300;text-transform:uppercase;letter-spacing:.04em;font-size:17px}
+.row .a{font-weight:300;font-size:17.5px;line-height:1.45;color:#dcdad4}
+.row i{font-style:normal;font-weight:200;font-size:22px;color:var(--bronze-l);text-align:right}
+.foot{position:absolute;left:16mm;right:16mm;bottom:6mm;display:flex;justify-content:space-between;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+</style></head><body>
+
+<!-- 1. COVER -->
+<section class="slide forest cover">
+  <div class="head"><div class="logo">PMA<br>&nbsp;&nbsp;Guide</div><div class="label">Установка · версия 0.1.0</div></div>
+  <h1>Референсы<br>из Pinterest —<br>в Figma</h1>
+  <p class="sub">Пошаговая установка PMA. Один шаг — одна страница.</p>
+  <div class="stat"><div class="big">30</div><div class="t">минут<br>на всё</div></div>
+  <div class="need">
+    <div>Windows 10/11<small>обычный компьютер</small></div>
+    <div>Google Chrome<small>уже стоит почти у всех</small></div>
+    <div>Figma — программа<small>не сайт</small></div>
+    <div>Ваш Pinterest<small>логин и пароль под рукой</small></div>
+  </div>
+  <div class="route" style="margin-top:0;margin-bottom:9mm">
+    <div><span>01</span>Установить</div><div><span>02</span>Pinterest</div><div><span>03</span>Figma</div><div class="opt"><span>04</span>AI · по желанию</div><div><span>05</span>Первая подборка</div>
+  </div>
+  <div class="foot"><span>PMA · Pinterest Moodboard Auto</span><span>Застряли — стр. 07</span></div>
+</section>
+
+<!-- 2. INSTALL -->
+<section class="slide">
+  <div class="head"><div class="logo">PMA<br>&nbsp;&nbsp;Guide</div><div class="label">Установка · 2 минуты</div></div>
+  <div class="nav"><div class="cur">01</div><div class="bar"></div><span>02</span><span>03</span><span>04</span><span>05</span></div>
+  <div class="grid">
+    <div>
+      <h2>Установить</h2>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><p>Дважды щёлкните <code>PMA-Setup-0.1.0-x64.exe</code></p></div>
+        <div class="step"><div class="n">2</div><p>Windows предупредит — это нормально<small>У программы пока нет подписи. Нажмите «Подробнее», затем «Выполнить в любом случае».</small></p></div>
+        <div class="step"><div class="n">3</div><p><b class="k">Установить</b> → <b class="k">Готово</b><small>На рабочем столе появится значок PMA.</small></p></div>
+      </div>
+      <p class="hint">Права администратора не нужны. Антивирус отключать не нужно.</p>
+    </div>
+    <div>
+      <div class="win">
+        <div class="pane"><h4>Система Windows защитила ваш компьютер</h4>Запуск неопознанного приложения…<br><br><span class="lnk">Подробнее</span></div>
+        <div class="arr">→</div>
+        <div class="pane"><h4>Система Windows защитила ваш компьютер</h4>Издатель: неизвестный издатель<br><span class="btn">Выполнить в любом случае</span><span class="btn2">Не запускать</span></div>
+      </div>
+      <div class="cap">Так выглядит предупреждение Windows</div>
+    </div>
+  </div>
+  <div class="done"><span>Готово, когда на рабочем столе есть значок PMA</span><i>↗</i></div>
+  <div class="foot"><span>PMA · Установка</span><span>02 / 07</span></div>
+</section>
+
+<!-- 3. PINTEREST -->
+<section class="slide forest">
+  <div class="head"><div class="logo">PMA<br>&nbsp;&nbsp;Guide</div><div class="label">Pinterest · 5 минут</div></div>
+  <div class="nav"><span>01</span><div class="cur">02</div><div class="bar"></div><span>03</span><span>04</span><span>05</span></div>
+  <div class="grid" style="grid-template-columns:1.15fr 1fr">
+    <div>
+      <h2>Подключить Pinterest</h2>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><p>Откройте PMA → <b class="k">Открыть своё подключение</b></p></div>
+        <div class="step"><div class="n">2</div><p>Название — любое. Придумайте пароль PMA<small>От 12 символов. Это не пароль Pinterest — запишите его, сбросить самим нельзя.</small></p></div>
+        <div class="step"><div class="n">3</div><p><b class="k">Создать подключение</b><small>Откроется отдельное окно Chrome с Pinterest.</small></p></div>
+        <div class="step"><div class="n">4</div><p>Войдите в Pinterest в этом окне → <b class="k">Я вошёл — проверить</b></p></div>
+      </div>
+      <p class="hint">Ваш обычный Chrome PMA не трогает — у неё свой, отдельный.</p>
+    </div>
+    <div class="shotwrap"><img class="shot" src="img/connect.png"><div class="cap">Создание подключения</div></div>
+  </div>
+  <div class="done"><span>Готово, когда слева внизу ваше имя с зелёной точкой</span><i>↗</i></div>
+  <div class="foot"><span>PMA · Pinterest</span><span>03 / 07</span></div>
+</section>
+
+<!-- 4. FIGMA -->
+<section class="slide">
+  <div class="head"><div class="logo">PMA<br>&nbsp;&nbsp;Guide</div><div class="label">Figma · 3 минуты · один раз</div></div>
+  <div class="nav"><span>01</span><span>02</span><div class="cur">03</div><div class="bar"></div><span>04</span><span>05</span></div>
+  <div class="grid">
+    <div>
+      <h2>Подключить Figma</h2>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><p>В PMA слева внизу <b class="k">Состояние PMA</b> → <b class="k">Открыть папку плагина</b></p></div>
+        <div class="step"><div class="n">2</div><p>Откройте Figma — программу, не сайт — и любой файл Design</p></div>
+        <div class="step"><div class="n">3</div><p>Plugins → Development → Import plugin from manifest<small>Выберите <code>manifest.json</code> из открытой папки.</small></p></div>
+      </div>
+      <p class="hint">Плагин работает, только пока PMA открыта. Нет пункта Development — это запрет в организации, напишите нам.</p>
+    </div>
+    <div class="shotwrap"><img class="shot" src="img/state.png"><div class="cap">Окно «Состояние PMA»</div></div>
+  </div>
+  <div class="done"><span>Готово, когда плагин есть в Plugins → Development</span><i>↗</i></div>
+  <div class="foot"><span>PMA · Figma</span><span>04 / 07</span></div>
+</section>
+
+<!-- 5. AI -->
+<section class="slide forest">
+  <div class="head"><div class="logo">PMA<br>&nbsp;&nbsp;Guide</div><div class="label">AI · по желанию · лучше вместе с нами</div></div>
+  <div class="nav"><span>01</span><span>02</span><span>03</span><div class="cur">04</div><div class="bar"></div><span>05</span></div>
+  <div class="grid" style="grid-template-columns:.85fr 1.15fr">
+    <div>
+      <h2>Подключить AI</h2>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><p>Ключ — platform.deepseek.com → API keys<small>Пополните счёт на пару долларов.</small></p></div>
+        <div class="step"><div class="n">2</div><p><b class="k">Настройки AI</b> → значения из таблицы</p></div>
+        <div class="step"><div class="n">3</div><p><b class="k">Сохранить профиль</b> → ключ → <b class="k">Сохранить ключ</b> → <b class="k">Платная проверка</b><small>Проверка стоит доли цента.</small></p></div>
+      </div>
+      <p class="hint">Без AI всё работает. С AI PMA сама делает запрос из замысла и подсказывает лучшие кадры. Больше вашего предела не потратит.</p>
+    </div>
+    <div>
+      <div class="vals">
+        <div class="val wide"><span>Адрес API</span><strong>https://api.deepseek.com</strong></div>
+        <div class="val"><span>Формат</span><strong>Responses</strong></div>
+        <div class="val"><span>Модель</span><strong>deepseek-flash</strong></div>
+        <div class="val"><span>Принимает изображения</span><strong>☑</strong></div>
+        <div class="val"><span>Изображений за запрос</span><strong>60</strong></div>
+        <div class="val"><span>Токенов на изображение</span><strong>3000</strong></div>
+        <div class="val"><span>Предел вывода</span><strong>32000</strong></div>
+        <div class="val"><span>Валюта</span><strong>USD</strong></div>
+        <div class="val"><span>Предел в месяц</span><strong>5</strong></div>
+        <div class="val"><span>Цена входа / 1 млн</span><strong>0.30</strong></div>
+        <div class="val"><span>Цена вывода / 1 млн</span><strong>1.20</strong></div>
+        <div class="val"><span>Рассуждения в выводе</span><strong>☑</strong></div>
+        <div class="val"><span>Вызовов в месяц</span><strong>100</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="done"><span>Готово: «Профиль проверен (текст и изображения)»</span><i>↗</i></div>
+  <div class="foot"><span>PMA · AI</span><span>05 / 07</span></div>
+</section>
+
+<!-- 6. FIRST COLLECTION -->
+<section class="slide">
+  <div class="head"><div class="logo">PMA<br>&nbsp;&nbsp;Guide</div><div class="label">Первая подборка · 10 минут</div></div>
+  <div class="nav"><span>01</span><span>02</span><span>03</span><span>04</span><div class="cur">05</div><div class="bar"></div></div>
+  <div class="grid" style="grid-template-columns:.95fr 1.25fr">
+    <div>
+      <h2>Первая подборка</h2>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><p><b class="k">Новое задание</b> → <b class="k">Опишу замысел</b> — своими словами</p></div>
+        <div class="step"><div class="n">2</div><p><b class="k">Подготовить поиск</b> → поправьте запрос → <b class="k">Запустить поиск</b></p></div>
+        <div class="step"><div class="n">3</div><p>Отметьте кадры → <b class="k">Сохранить выбор</b></p></div>
+        <div class="step"><div class="n">4</div><p>Не нравится кадр? <b class="k">Заменить этот кадр</b></p></div>
+        <div class="step"><div class="n">5</div><p><b class="k">Экспорт выбранного</b> → Figma и/или секретная доска</p></div>
+      </div>
+    </div>
+    <div class="shotwrap"><img class="shot" src="img/results.png"><div class="cap">Экран подборки · картинки — пример</div></div>
+  </div>
+  <div class="done"><span>Готово, когда подборка появилась в Figma и на доске</span><i>↗</i></div>
+  <div class="foot"><span>PMA · Подборка</span><span>06 / 07</span></div>
+</section>
+
+<!-- 7. HELP -->
+<section class="slide forest">
+  <div class="head"><div class="logo">PMA<br>&nbsp;&nbsp;Guide</div><div class="label">Помощь · ничего не пропадает</div></div>
+  <h2 style="margin-top:4mm">Что-то не так</h2>
+  <div class="rows">
+    <div class="row"><div class="q">Pinterest просит войти</div><div class="a"><b class="k">Открыть Pinterest</b> → войдите → <b class="k">Продолжить поиск</b></div><i>↗</i></div>
+    <div class="row"><div class="q">Поиск прервался, PMA закрыли</div><div class="a"><b class="k">Продолжить поиск</b> — найденное сохранено</div><i>↗</i></div>
+    <div class="row"><div class="q">Плагин «другой версии»</div><div class="a">Закройте окно плагина в Figma и откройте заново</div><i>↗</i></div>
+    <div class="row"><div class="q">Нет кода Figma, «порт занят»</div><div class="a">Закройте лишние копии PMA, запустите PMA заново</div><i>↗</i></div>
+    <div class="row"><div class="q">AI закрыт</div><div class="a">Настройки AI → <b class="k">Платная проверка</b>. Без AI тоже работает</div><i>↗</i></div>
+    <div class="row"><div class="q">Забыли пароль PMA</div><div class="a">Самим не сбросить — напишите нам</div><i>↗</i></div>
+  </div>
+  <div class="done" style="margin-top:auto"><span>Не помогло: Состояние PMA → Создать отчёт для помощи → пришлите нам</span><i>↗</i></div>
+  <p class="hint">В отчёте нет проектов, картинок и паролей. Проекты хранятся отдельно — обновление и удаление PMA их не трогают.</p>
+  <div class="foot"><span>PMA · Помощь</span><span>07 / 07</span></div>
+</section>
+</body></html>
