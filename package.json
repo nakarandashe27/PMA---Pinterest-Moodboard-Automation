@@ -1,7 +1,7 @@
 {
   "name": "pma-local",
   "productName": "PMA",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "PMA — подборки референсов Pinterest для ландшафтного бюро",
   "author": "PMA",
   "private": true,
@@ -44,6 +44,7 @@
     "directories": {
       "output": "release"
     },
+    "publish": null,
     "files": [
       "package.json",
       "desktop/main.mjs",
