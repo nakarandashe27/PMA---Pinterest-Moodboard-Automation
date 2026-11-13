@@ -17,6 +17,7 @@ export const OPERATIONS=[
   op('GET','/exports/:id'),
   op('GET','/diagnostics'),op('POST','/diagnostics/report'),
   op('GET','/ai/profile'),op('PUT','/ai/profile'),op('PUT','/ai/key'),op('POST','/ai/key/delete'),op('POST','/ai/probe'),
+  op('PUT','/ai/mode'),op('POST','/ai/codex/(?:probe|login)'),
   op('POST','/exports/:id/(?:figma-new-attempt|figma-code|pinterest|pinterest-reconcile|pinterest-cancel|board)'),
 ];
 const MEDIA=[/^\/media\/assets\/[a-f0-9]{64}\.(?:jpg|png|webp)$/,/^\/media\/uploads\/[a-f0-9-]{36}$/,/^\/evaluations\/[a-f0-9-]{36}$/];

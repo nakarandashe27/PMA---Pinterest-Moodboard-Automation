@@ -69,6 +69,9 @@ code{font-family:Consolas,monospace;font-size:.9em;color:var(--bronze-l);white-s
 .val span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .val strong{font-family:Consolas,monospace;font-weight:400;font-size:17px;white-space:nowrap}
 .val.wide{grid-column:1/3}
+.cmd{display:block;margin-top:4px;font-family:Consolas,monospace;font-size:10.5px;white-space:normal;word-break:break-all}
+.alt{font-weight:300;font-size:14px;line-height:1.45;color:var(--muted)}
+.alt+.vals{margin-top:5mm}
 /* help */
 .rows{border-top:1px solid var(--line)}
 .row{display:grid;grid-template-columns:1fr 1.3fr 30px;gap:10mm;padding:17px 0;border-bottom:1px solid var(--line);align-items:center}
@@ -80,7 +83,7 @@ code{font-family:Consolas,monospace;font-size:.9em;color:var(--bronze-l);white-s
 
 <!-- 1. COVER -->
 <section class="slide forest cover">
-  <div class="head"><div class="logo">PMA<br>&nbsp;&nbsp;Guide</div><div class="label">Установка · версия 0.1.1</div></div>
+  <div class="head"><div class="logo">PMA<br>&nbsp;&nbsp;Guide</div><div class="label">Установка · версия 0.1.2</div></div>
   <h1>Референсы<br>из Pinterest —<br>в Figma</h1>
   <p class="sub">Пошаговая установка PMA. Один шаг — одна страница.</p>
   <div class="stat"><div class="big">30</div><div class="t">минут<br>на всё</div></div>
@@ -168,17 +171,18 @@ code{font-family:Consolas,monospace;font-size:.9em;color:var(--bronze-l);white-s
 <section class="slide forest">
   <div class="head"><div class="logo">PMA<br>&nbsp;&nbsp;Guide</div><div class="label">AI · по желанию · лучше вместе с нами</div></div>
   <div class="nav"><span>01</span><span>02</span><span>03</span><div class="cur">04</div><div class="bar"></div><span>05</span></div>
-  <div class="grid" style="grid-template-columns:.85fr 1.15fr">
+  <div class="grid" style="grid-template-columns:1.1fr .9fr">
     <div>
       <h2>Подключить AI</h2>
       <div class="steps">
-        <div class="step"><div class="n">1</div><p>Ключ — platform.deepseek.com → API keys<small>Пополните счёт на пару долларов.</small></p></div>
-        <div class="step"><div class="n">2</div><p><b class="k">Настройки AI</b> → значения из таблицы</p></div>
-        <div class="step"><div class="n">3</div><p><b class="k">Сохранить профиль</b> → ключ → <b class="k">Сохранить ключ</b> → <b class="k">Платная проверка</b><small>Проверка стоит доли цента.</small></p></div>
+        <div class="step"><div class="n">1</div><p>Есть подписка ChatGPT? Поставьте Codex<small>Пуск → PowerShell → вставить и Enter:<br><code class="cmd">powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"</code></small></p></div>
+        <div class="step"><div class="n">2</div><p>Войдите через ChatGPT<small>В приложении Codex или кнопкой <b class="k">Войти через ChatGPT</b> в PMA. Пароль — только на сайте ChatGPT.</small></p></div>
+        <div class="step"><div class="n">3</div><p><b class="k">Настройки AI</b> → <b class="k">Подписка ChatGPT (Codex)</b> → <b class="k">Обновить состояние</b> → <b class="k">Проверить</b></p></div>
       </div>
-      <p class="hint">Без AI всё работает. С AI PMA сама делает запрос из замысла и подсказывает лучшие кадры. Больше вашего предела не потратит.</p>
+      <p class="hint">Без AI всё работает. Подписка тратит лимиты ChatGPT, не деньги. Приложение Codex из Store одно не подходит — нужна команда из шага 1.</p>
     </div>
     <div>
+      <p class="alt">Или свой API-ключ: platform.deepseek.com → API keys → <b class="k">Свой API-ключ</b> → значения ниже → <b class="k">Сохранить профиль</b> → ключ → <b class="k">Платная проверка</b></p>
       <div class="vals">
         <div class="val wide"><span>Адрес API</span><strong>https://api.deepseek.com</strong></div>
         <div class="val"><span>Формат</span><strong>Responses</strong></div>
@@ -196,7 +200,7 @@ code{font-family:Consolas,monospace;font-size:.9em;color:var(--bronze-l);white-s
       </div>
     </div>
   </div>
-  <div class="done"><span>Готово: «Профиль проверен (текст и изображения)»</span><i>↗</i></div>
+  <div class="done"><span>Готово: «Проверка пройдена»</span><i>↗</i></div>
   <div class="foot"><span>PMA · AI</span><span>05 / 07</span></div>
 </section>
 
@@ -230,7 +234,7 @@ code{font-family:Consolas,monospace;font-size:.9em;color:var(--bronze-l);white-s
     <div class="row"><div class="q">Поиск прервался, PMA закрыли</div><div class="a"><b class="k">Продолжить поиск</b> — найденное сохранено</div><i>↗</i></div>
     <div class="row"><div class="q">Плагин «другой версии»</div><div class="a">Закройте окно плагина в Figma и откройте заново</div><i>↗</i></div>
     <div class="row"><div class="q">Нет кода Figma, «порт занят»</div><div class="a">Закройте лишние копии PMA, запустите PMA заново</div><i>↗</i></div>
-    <div class="row"><div class="q">AI закрыт</div><div class="a">Настройки AI → <b class="k">Платная проверка</b>. Без AI тоже работает</div><i>↗</i></div>
+    <div class="row"><div class="q">AI закрыт</div><div class="a">Настройки AI → <b class="k">Проверить</b> (подписка) или <b class="k">Платная проверка</b> (ключ). Без AI тоже работает</div><i>↗</i></div>
     <div class="row"><div class="q">Забыли пароль PMA</div><div class="a">Самим не сбросить — напишите нам</div><i>↗</i></div>
   </div>
   <div class="done" style="margin-top:auto"><span>Не помогло: Состояние PMA → Создать отчёт для помощи → пришлите нам</span><i>↗</i></div>

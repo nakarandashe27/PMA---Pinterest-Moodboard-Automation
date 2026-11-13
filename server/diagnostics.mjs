@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {profileId,profileHash} from './ai-api.mjs';
+import {aiMode,modeId} from './ai-codex.mjs';
 
 const tally=(items,field)=>items.reduce((acc,item)=>{const k=String(item?.[field]??'none').replace(/[^a-z-]/gi,'').slice(0,30)||'other';acc[k]=(acc[k]||0)+1;return acc;},{});
 
@@ -16,7 +17,7 @@ export function serviceStatus({store,owner,info}){
     data:{schema:info.schemaVersion,backupBeforeMigration:!!info.schemaBackup,ledger:store.ledger?{available:!store.ledger.blocked}:null},
     figma:{bridge:info.figma.available?'listening':'unavailable',reason:info.figma.available?null:info.figma.reason,protocol:info.figmaProtocol,pluginFolderReady:!!info.pluginReady},
     session:{unlocked:!!owner},
-    ai:owner?{configured:!!p,enabled:!!p?.enabled,keyConfigured:!!p?.keySetAt,verified:!!p&&p.verification?.profileHash===profileHash(p),blocked:!!p?.blockedReason}:null,
+    ai:owner?{mode:aiMode(store,owner),codexVerified:!!store.get('ai-mode',modeId(owner))?.verification,configured:!!p,enabled:!!p?.enabled,keyConfigured:!!p?.keySetAt,verified:!!p&&p.verification?.profileHash===profileHash(p),blocked:!!p?.blockedReason}:null,
     work:owner?{runs:tally(store.list('run').filter(own),'status'),interpretations:tally(store.list('interpretation').filter(own),'status'),
       figmaAttempts:tally(store.list('figma-attempt').filter(own),'state'),pinterestExports:tally(store.list('pinterest-export').filter(own),'state')}:null,
   };

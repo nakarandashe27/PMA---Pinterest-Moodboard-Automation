@@ -4,7 +4,7 @@ import {api,reveal} from '../api';
 
 type Status={app:{version:string;electron:string|null;os:string;arch:string};data:{schema:number;ledger:{available:boolean}|null};
   figma:{bridge:'listening'|'unavailable';reason:string|null;protocol:number;pluginFolderReady:boolean};session:{unlocked:boolean};
-  ai:{configured:boolean;enabled:boolean;keyConfigured:boolean;verified:boolean;blocked:boolean}|null};
+  ai:{mode:'api'|'codex';codexVerified:boolean;configured:boolean;enabled:boolean;keyConfigured:boolean;verified:boolean;blocked:boolean}|null};
 
 // Minimal self-service status: what works, where the Figma plugin is, and a safe report on request.
 export default function Diagnostics({onClose}:{onClose:()=>void}){
@@ -20,7 +20,7 @@ export default function Diagnostics({onClose}:{onClose:()=>void}){
         <ol className="instructions"><li>Откройте Figma Desktop и любой файл Figma Design.</li><li>Меню <strong>Plugins → Development → Import plugin from manifest…</strong>, выберите <code>manifest.json</code> в папке плагина PMA.</li><li>Это нужно сделать один раз. После обновления PMA закройте окно плагина и запустите его снова.</li></ol>
         <button className="button secondary small" disabled={!status.figma.pluginFolderReady} onClick={()=>void reveal('figma-plugin')}>Открыть папку плагина</button>
       </section>
-      <section className="export-target"><h3>AI</h3><p>{!status.session.unlocked?'Откройте своё подключение, чтобы увидеть состояние AI.':!ai?.configured?'Не настроен — работает ручной путь.':ai.blocked?'Закрыт до новой проверки (см. «Настройки AI»).':!ai.verified?'Профиль не проверен.':ai.enabled?'Готов к работе.':'Выключен владельцем.'}</p>
+      <section className="export-target"><h3>AI</h3><p>{!status.session.unlocked?'Откройте своё подключение, чтобы увидеть состояние AI.':ai?.mode==='codex'?(ai.codexVerified?'Подписка ChatGPT (Codex): проверка пройдена.':'Подписка ChatGPT (Codex): не проверена — работает ручной путь.'):!ai?.configured?'Не настроен — работает ручной путь.':ai.blocked?'Закрыт до новой проверки (см. «Настройки AI»).':!ai.verified?'Профиль не проверен.':ai.enabled?'Готов к работе.':'Выключен владельцем.'}</p>
         {status.data.ledger&&!status.data.ledger.available?<p className="form-error">Учёт расхода AI требует сверки; платный AI закрыт.</p>:null}</section>
       <div className="modal-actions"><button className="button secondary" onClick={()=>void report()}>Создать отчёт для помощи</button></div>
     </>:null}

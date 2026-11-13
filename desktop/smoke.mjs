@@ -40,7 +40,7 @@ const figmaPort=await new Promise(resolve=>{const s=net.createServer().listen(0,
 // PMA_SMOKE_EXE=<installed PMA.exe> runs the same checks against the installed package, with no Node/npm on PATH.
 const packagedExe=process.env.PMA_SMOKE_EXE||null,appArgs=packagedExe?[]:[path.join(here,'main.mjs')],appExe=packagedExe||electronPath;
 const cleanPath=(process.env.PATH||'').split(';').filter(p=>p&&!/nodejs|\npm|node_modules|codex/i.test(p)).join(';');
-const launchEnv={...process.env,PMA_DESKTOP_ROOT:root,PMA_FIGMA_PORT:String(figmaPort),PMA_TEST_PINTEREST:'hang',...(packagedExe?{PATH:cleanPath}:{})};
+const launchEnv={...process.env,PMA_DESKTOP_ROOT:root,PMA_FIGMA_PORT:String(figmaPort),PMA_TEST_PINTEREST:'hang',PMA_TEST_CODEX:'none',...(packagedExe?{PATH:cleanPath}:{})};
 if(packagedExe)console.log('Installed package:',packagedExe);
 const launch=()=>_electron.launch({executablePath:appExe,args:appArgs,env:launchEnv});
 const app=await launch();
@@ -82,6 +82,12 @@ try{
   const dbText=fs.readFileSync(path.join(data,'pma.sqlite')).toString('latin1')+(fs.existsSync(path.join(data,'pma.sqlite-wal'))?fs.readFileSync(path.join(data,'pma.sqlite-wal')).toString('latin1'):'');assert.equal(dbText.includes(key),false);
   ok('AI key sealed by Windows DPAPI, shown only as …WXYZ, absent from the database and replies');
   assert.equal((await call('POST','/api/ai/key/delete',{})).data.keyConfigured,false);assert.deepEqual(fs.readdirSync(path.join(root,'secrets')),[]);ok('AI key deleted from the vault');
+  // Subscription mode in the UI; PMA_TEST_CODEX=none stands for a PC without Codex, so no real Codex runs.
+  await page.getByRole('button',{name:'Настройки AI'}).click();await page.getByLabel('Подписка ChatGPT (Codex)').click();
+  await page.getByText('Codex: не найден на этом компьютере').waitFor();assert.equal(await page.getByRole('button',{name:'Проверить'}).isDisabled(),true);
+  assert.equal((await call('POST','/api/ai/codex/probe',{})).status,409);
+  await page.getByLabel('Свой API-ключ').click();await page.getByText('Адрес API (HTTPS)').waitFor();await page.getByRole('button',{name:'Закрыть'}).last().click();
+  ok('AI mode: missing Codex is explained, its check is closed, API mode comes back');
   const reportOpened=app.waitForEvent('window');await page.evaluate(id=>window.open('/evaluations/'+id),evaluationId);const report=await reportOpened;await report.waitForLoadState('domcontentloaded');
   assert.equal(await report.textContent('#r'),'Private report A');assert.equal(await report.evaluate(()=>typeof window.pma),'undefined');ok('AI report opens in its own window without the bridge');
   assert.equal(await page.evaluate(()=>{window.open('https://example.com/');window.open('file:///C:/Windows/win.ini');return 1;}),1);await new Promise(r=>setTimeout(r,500));assert.equal(app.windows().length,2);ok('other window.open targets are denied');

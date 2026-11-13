@@ -6,12 +6,14 @@ import {createPmaServer,FIGMA_PROTOCOL} from '../server/app.mjs';
 import {serviceStatus,writeReport} from '../server/diagnostics.mjs';
 import {Ledger} from '../server/ledger.mjs';
 import {importLegacyReservations} from '../server/ai-budget.mjs';
-import {createApiExecutor} from '../server/ai-api.mjs';
+import {pickExecutor,findCodex} from '../server/ai-codex.mjs';
 import {AppError} from '../server/domain.mjs';
 import {layout,ensureLayout,acquireInstanceLock,prepareSchema,diskStatus} from '../server/data-root.mjs';
 
 // The Figma plugin expects 8787; PMA_FIGMA_PORT exists only so tests can run beside a live prototype.
 const FIGMA_PORT=Number(process.env.PMA_FIGMA_PORT)||8787;
+// Smoke tests only: PMA_TEST_CODEX=none stands for a PC without Codex, so the owner's real Codex is never run.
+const codexLocate=process.env.PMA_TEST_CODEX==='none'?()=>null:findCodex;
 let app,store,ipc,port,lock,stopping=false;
 // API keys live only in main's OS-protected vault; the worker asks for one key, for one owner, when sending.
 const vaultWaiting=new Map();let vaultSeq=0;
@@ -38,7 +40,7 @@ async function start({root,workspace,appVersion,pluginReady}){
   const info={appVersion,pluginReady,figmaProtocol:FIGMA_PROTOCOL,schemaVersion:schema.version,schemaBackup:schema.backup?.id||null,figma:{available:false,reason:'Мост Figma запускается'}};
   const pinterest=process.env.PMA_TEST_PINTEREST==='hang'?new HangingPinterest(paths.root,{headless:true}):new Pinterest(paths.root);
   const diagnostics={status:owner=>serviceStatus({store,owner,info}),report:owner=>writeReport(paths.diagnostics,serviceStatus({store,owner,info}))};
-  app=createPmaServer({workspace,root:paths.data,store,pinterest,diagnostics,figmaStatus:()=>info.figma,port:FIGMA_PORT,figmaOnly:true,freeSpace:()=>diskStatus(paths).freeBytes,vault,aiExecutor:connectionId=>createApiExecutor({store,connectionId,vault})});
+  app=createPmaServer({workspace,root:paths.data,store,pinterest,diagnostics,figmaStatus:()=>info.figma,port:FIGMA_PORT,figmaOnly:true,freeSpace:()=>diskStatus(paths).freeBytes,vault,codexLocate,aiExecutor:connectionId=>pickExecutor({store,connectionId,vault,locate:codexLocate})});
   ipc=app.createIpcClient();
   const figma=await new Promise(resolve=>{
     app.server.once('error',error=>resolve({available:false,reason:error.code==='EADDRINUSE'?'Порт 8787 занят другим процессом':'Не удалось открыть порт Figma'}));

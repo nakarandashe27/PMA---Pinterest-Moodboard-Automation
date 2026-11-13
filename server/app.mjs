@@ -12,11 +12,12 @@ import { performPinterestExport,verifiedBoard } from './export-pinterest.mjs';
 import {rankCandidates} from './ranking.mjs';
 import {validateProfile,profileHash,profileId} from './ai-api.mjs';
 import {probeProfile} from './ai-probe.mjs';
+import {AI_MODES,aiMode,modeId,findCodex,codexStatus,probeCodex,startCodexLogin,stopCodexLogin} from './ai-codex.mjs';
 import { AppError,OwnerStop,LIMITS,shortTitle,requiredText,text,selectedItems,mediaType,sha256 } from './domain.mjs';
 
 // Plugin↔app protocol. The plugin sends ?protocol=N on every call; a mismatch stops before any read or write.
 export const FIGMA_PROTOCOL=2;
-export function createPmaServer({workspace,root,store,pinterest,port=8787,dev=false,figmaOnly=false,freeSpace=null,minFreeBytes=300*1024*1024,aiExecutor=null,vault=null,aiPost,diagnostics=null,figmaStatus=null,authOptions={},interpretationOptions={}}){
+export function createPmaServer({workspace,root,store,pinterest,port=8787,dev=false,figmaOnly=false,freeSpace=null,minFreeBytes=300*1024*1024,aiExecutor=null,vault=null,aiPost,codexLocate=findCodex,diagnostics=null,figmaStatus=null,authOptions={},interpretationOptions={}}){
 const jobs=new Map();
 const requestContext=new AsyncLocalStorage();
 let changingConnection=false;
@@ -86,7 +87,7 @@ async function openConnection(c){
 }
 function startSearch(run,connection,uploads){
   const controller=new AbortController();jobs.set(run.id,controller);
-  // Desktop: ranking uses the owner's API profile; there is no silent fallback to the Codex CLI.
+  // Desktop: ranking uses the owner's chosen AI mode (API profile or Codex); there is no silent fallback.
   const rank=aiExecutor?args=>rankCandidates({...args,...aiExecutor(connection.id)}):undefined;
   controller.done=Promise.resolve().then(()=>(run.replacement?performReplacement:performSearch)({store,pinterest,root,run,connection,uploads:uploads.map(u=>({...u,path:path.join(root,'uploads',u.filename)})),controller,rank})).finally(()=>jobs.delete(run.id));
   controller.done.catch(error=>console.error('Search worker failed:',error.message));
@@ -176,25 +177,40 @@ async function dispatchRoute(method,route,readBody){
         if(!aiExecutor||!vault)throw new AppError('Настройка API доступна только в настольной PMA',501);
         const owner=activeId(),month=moscowMonth();
         // The key never leaves the vault through this view: only whether it is set and its last 4 characters.
-        const view=()=>{const p=store.get('ai-profile',profileId(owner));const {verification,keySetAt,keyHint,blockedReason,id,connectionId,...settings}=p||{};
-          return {profile:p?settings:null,keyConfigured:!!keySetAt,keyHint:keyHint||null,verified:!!p&&verification?.profileHash===profileHash(p),verification:verification||null,blockedReason:blockedReason||null,ledgerBlocked:store.ledger?.blocked||null,
+        const view=async()=>{const p=store.get('ai-profile',profileId(owner));const {verification,keySetAt,keyHint,blockedReason,id,connectionId,...settings}=p||{};
+          const mode=aiMode(store,owner),runtime=mode==='codex'?codexLocate():null,cv=store.get('ai-mode',modeId(owner))?.verification;
+          return {mode,codex:mode==='codex'?{...await codexStatus(runtime),verified:!!runtime&&cv?.path===runtime.path,verification:cv?{at:cv.at,model:cv.model}:null}:null,
+            profile:p?settings:null,keyConfigured:!!keySetAt,keyHint:keyHint||null,verified:!!p&&verification?.profileHash===profileHash(p),verification:verification||null,blockedReason:blockedReason||null,ledgerBlocked:store.ledger?.blocked||null,
             month:{key:month,poolCalls:store.ledger?store.ledger.usedInMonth(month):null,spend:store.ledger?store.ledger.monthSpend(owner,month):[]}};};
         const saveProfile=changes=>{const p=store.get('ai-profile',profileId(owner));store.save('ai-profile',{...p,...changes,id:profileId(owner),connectionId:owner,verification:null,updatedAt:new Date().toISOString()});};
-        if(route==='/api/ai/profile'&&method==='GET')return reply(view());
-        if(route==='/api/ai/profile'&&method==='PUT'){const settings=validateProfile(await body(readBody));saveProfile({...settings,blockedReason:null});return reply(view());}
+        if(route==='/api/ai/profile'&&method==='GET')return reply(await view());
+        if(route==='/api/ai/profile'&&method==='PUT'){const settings=validateProfile(await body(readBody));saveProfile({...settings,blockedReason:null});return reply(await view());}
         if(route==='/api/ai/key'&&method==='PUT'){
           const data=await body(readBody);if(!store.get('ai-profile',profileId(owner)))throw new AppError('Сначала сохраните профиль API',409);
           if(typeof data.key!=='string'||!/^[\x21-\x7e]{16,512}$/.test(data.key))throw new AppError('Ключ API: от 16 до 512 видимых символов без пробелов',400);
           await vault.put(owner,data.key);if(owner!==activeId())throw new AppError('Подключение сменилось во время сохранения',401);
-          saveProfile({keySetAt:new Date().toISOString(),keyHint:'…'+data.key.slice(-4)});return reply(view());
+          saveProfile({keySetAt:new Date().toISOString(),keyHint:'…'+data.key.slice(-4)});return reply(await view());
         }
-        if(route==='/api/ai/key/delete'&&method==='POST'){await body(readBody);await vault.delete(owner);saveProfile({keySetAt:null,keyHint:null});return reply(view());}
+        if(route==='/api/ai/key/delete'&&method==='POST'){await body(readBody);await vault.delete(owner);saveProfile({keySetAt:null,keyHint:null});return reply(await view());}
         if(route==='/api/ai/probe'&&method==='POST'){
           await body(readBody);if(jobs.size)throw new AppError('Дождитесь завершения текущей операции',409);
           const controller=new AbortController(),id='ai-probe-'+owner;jobs.set(id,controller);
           controller.done=probeProfile({store,root,connectionId:owner,vault,post:aiPost,signal:controller.signal}).finally(()=>jobs.delete(id));
-          await controller.done;return reply(view());
+          await controller.done;return reply(await view());
         }
+        // Mode is the owner's explicit choice; switching never calls a model and never moves to the other mode by itself.
+        if(route==='/api/ai/mode'&&method==='PUT'){
+          const data=await body(readBody);if(!AI_MODES.includes(data.mode))throw new AppError('Режим AI: api или codex',400);
+          if(jobs.size)throw new AppError('Дождитесь завершения текущей операции',409);
+          const m=store.get('ai-mode',modeId(owner));store.save('ai-mode',{...m,id:modeId(owner),connectionId:owner,mode:data.mode,updatedAt:new Date().toISOString()});return reply(await view());
+        }
+        if(route==='/api/ai/codex/probe'&&method==='POST'){
+          await body(readBody);if(jobs.size)throw new AppError('Дождитесь завершения текущей операции',409);
+          const controller=new AbortController(),id='ai-probe-'+owner;jobs.set(id,controller);
+          controller.done=probeCodex({store,root,connectionId:owner,locate:codexLocate,signal:controller.signal}).finally(()=>jobs.delete(id));
+          await controller.done;return reply(await view());
+        }
+        if(route==='/api/ai/codex/login'&&method==='POST'){await body(readBody);startCodexLogin(codexLocate);return reply(await view());}
         throw new AppError('Маршрут не найден',404);
       }
       if(route==='/api/interpretations'&&method==='POST'){
@@ -413,7 +429,7 @@ const server=http.createServer((req,res)=>requestContext.run(auth.fromRequest(re
 }));
 server.on('listening',()=>{localOrigins.add('http://127.0.0.1:'+server.address().port);localOrigins.add('http://localhost:'+server.address().port);});
 const shutdown=async()=>{
-  clearInterval(expiryTimer);auth.lock();
+  clearInterval(expiryTimer);auth.lock();stopCodexLogin();
   const pending=[...jobs.values()],closed=new Promise(resolve=>server.close(resolve));
   for(const controller of pending)controller.abort(new OwnerStop());
   await pinterest.close();await Promise.allSettled(pending.map(c=>c.done));
